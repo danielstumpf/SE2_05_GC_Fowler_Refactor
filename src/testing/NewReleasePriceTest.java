@@ -1,24 +1,34 @@
 package testing;
 
+import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 import org.junit.Test;
+
+import program.ChildrensPrice;
+import program.NewReleasePrice;
 
 public class NewReleasePriceTest {
 
 	@Test
 	public void testGetPriceCode() {
-		fail("Not yet implemented");
+		NewReleasePrice newReleasePrice = new NewReleasePrice();
+		int priceCode = newReleasePrice.getPriceCode();
+		assertThat("Should return the value 1", priceCode, is(1));
 	}
 
 	@Test
 	public void testGetCharge() {
-		fail("Not yet implemented");
+		NewReleasePrice newReleasePrice = new NewReleasePrice();
+		double charge = newReleasePrice.getCharge(8);
+		assertThat("Should return the value 24", charge, is(24));
 	}
 
 	@Test
 	public void testGetFrequentRenterPoints() {
-		fail("Not yet implemented");
+		NewReleasePrice newReleasePrice = new NewReleasePrice();
+		int frequentRenterPoints = newReleasePrice.getFrequentRenterPoints(100);
+		assertThat("Should return the value 2", frequentRenterPoints, is(2));
 	}
 
 }
