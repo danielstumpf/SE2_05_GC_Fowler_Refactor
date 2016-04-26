@@ -1,11 +1,10 @@
 package program;
 
-import java.lang.*;
 import java.util.*;
 
-class Customer {
+public class Customer {
     private String name;
-    private Vector rentals = new Vector();
+    public Vector rentals = new Vector();
     public Customer (String newname){
         name = newname;
     };
@@ -67,4 +66,3 @@ class Customer {
     }
 
 }
-    
