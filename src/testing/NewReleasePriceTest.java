@@ -5,7 +5,6 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import program.ChildrensPrice;
 import program.NewReleasePrice;
 
 public class NewReleasePriceTest {
@@ -30,5 +29,4 @@ public class NewReleasePriceTest {
 		int frequentRenterPoints = newReleasePrice.getFrequentRenterPoints(100);
 		assertThat("Should return the value 2", frequentRenterPoints, is(2));
 	}
-
 }
