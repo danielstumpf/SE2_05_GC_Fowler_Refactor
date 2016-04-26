@@ -21,7 +21,7 @@ public class NewReleasePriceTest {
 	public void testGetCharge() {
 		NewReleasePrice newReleasePrice = new NewReleasePrice();
 		double charge = newReleasePrice.getCharge(8);
-		assertThat("Should return the value 24", charge, is(24));
+		assertThat("Should return the value 24.0", charge, is(24.0));
 	}
 
 	@Test
