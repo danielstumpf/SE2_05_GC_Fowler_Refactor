@@ -13,7 +13,7 @@ public class Rental {
         return movie;
     }
 
-    public double getCharge() {
+    public double getAmount() {
         return getMovie().getCharge(getDaysRented());
     }
 

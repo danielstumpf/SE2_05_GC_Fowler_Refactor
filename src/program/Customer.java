@@ -25,11 +25,11 @@ public class Customer {
 		
 		for (Rental rental : rentals) {
 			builder.append("\t" + rental.getMovie().getTitle() + "\t" + "\t" + rental.getDaysRented() + "\t"
-					+ String.valueOf(rental.getCharge()) + "\n");
+					+ String.valueOf(rental.getAmount()) + "\n");
 		}
 		
 		// add footer lines
-		builder.append("Amount owed is " + String.valueOf(getTotalCharge()) + "\n");
+		builder.append("Amount owed is " + String.valueOf(getTotalAmount()) + "\n");
 		builder.append("You earned " + String.valueOf(getTotalFrequentRenterPoints()) + " frequent renter points");
 		return builder.toString();
 	}
@@ -58,11 +58,11 @@ public class Customer {
 	// it, and you will have more
 	// options to optimize effectively (see the discussion on page 69).
 
-	private double getTotalCharge() {
+	private double getTotalAmount() {
 		double result = 0;
 		
 		for (Rental rental : rentals) {
-			result += rental.getCharge();
+			result += rental.getAmount();
 		}
 		return result;
 	}
