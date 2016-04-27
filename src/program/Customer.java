@@ -18,16 +18,30 @@ public class Customer {
 		return name;
 	}
 
+	public String htmlStatement() {
+		StringBuilder builder = new StringBuilder();
+		builder.append("<H1>Rentals for <EM>" + getName() + "</EM></H1><P>\n");
+		for (Rental rental : rentals) {
+			builder.append(rental.getMovie().getTitle() + ": " + String.valueOf(rental.getCharge()) + "<BR>\n");
+		}
+
+		// add footer lines
+		builder.append("<P>You owe <EM>" + String.valueOf(getTotalCharge()) + "</EM><P>\n");
+		builder.append("On this rental you earned <EM>" + String.valueOf(getTotalFrequentRenterPoints())
+				+ "</EM> frequent renter points<P>");
+		return builder.toString();
+	}
+
 	public String statement() {
 		StringBuilder builder = new StringBuilder();
 		builder.append("Rental Record for " + this.getName() + "\n");
 		builder.append("\t" + "Title" + "\t" + "\t" + "Days" + "\t" + "Amount" + "\n");
-		
+
 		for (Rental rental : rentals) {
 			builder.append("\t" + rental.getMovie().getTitle() + "\t" + "\t" + rental.getDaysRented() + "\t"
 					+ String.valueOf(rental.getCharge()) + "\n");
 		}
-		
+
 		// add footer lines
 		builder.append("Amount owed is " + String.valueOf(getTotalCharge()) + "\n");
 		builder.append("You earned " + String.valueOf(getTotalFrequentRenterPoints()) + " frequent renter points");
@@ -60,7 +74,7 @@ public class Customer {
 
 	private double getTotalCharge() {
 		double result = 0;
-		
+
 		for (Rental rental : rentals) {
 			result += rental.getCharge();
 		}
@@ -69,7 +83,7 @@ public class Customer {
 
 	private int getTotalFrequentRenterPoints() {
 		int result = 0;
-		
+
 		for (Rental rental : rentals) {
 			result += rental.getFrequentRenterPoints();
 		}
