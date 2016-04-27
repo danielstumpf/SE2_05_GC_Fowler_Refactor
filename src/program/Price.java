@@ -8,6 +8,6 @@ package program;
  */
 public interface Price {
     abstract int getPriceCode();
-    abstract double getCharge(int daysRented);
+    abstract double getAmount(int daysRented);
     abstract int getFrequentRenterPoints(int daysRented);
 }

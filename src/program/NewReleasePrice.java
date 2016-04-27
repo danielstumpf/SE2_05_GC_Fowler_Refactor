@@ -11,7 +11,7 @@ public class NewReleasePrice implements Price {
         return Movie.NEW_RELEASE;
     }
 
-    public double getCharge(int daysRented){
+    public double getAmount(int daysRented){
         return (daysRented * 3 );
     }
 

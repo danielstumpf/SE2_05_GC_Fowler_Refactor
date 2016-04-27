@@ -11,7 +11,7 @@ public class RegularPrice implements Price {
         return Movie.REGULAR;
     }
 
-    public double getCharge(int daysRented){
+    public double getAmount(int daysRented){
         if (daysRented > 2) return (daysRented - 2 ) * 1.5;
         else return 2;
     }
