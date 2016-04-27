@@ -2,8 +2,6 @@ package testing;
 
 import static org.junit.Assert.*;
 
-import java.util.regex.Matcher;
-
 import static org.hamcrest.CoreMatchers.is;
 
 import org.junit.Test;
