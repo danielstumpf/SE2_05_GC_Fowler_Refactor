@@ -19,7 +19,7 @@ public class RegularPriceTest {
 	@Test
 	public void testGetCharge_mitEins() {
 		RegularPrice RegularPrice = new RegularPrice();
-		double getRegularPrice = RegularPrice.getCharge(1);
+		double getRegularPrice = RegularPrice.getAmount(1);
 		
 		assertThat("Should return the value 2", getRegularPrice, is(2.0));
 	}
@@ -27,7 +27,7 @@ public class RegularPriceTest {
 	@Test
 	public void testGetCharge_mitVier() {
 		RegularPrice RegularPrice = new RegularPrice();
-		double getRegularPrice = RegularPrice.getCharge(4);
+		double getRegularPrice = RegularPrice.getAmount(4);
 		
 		assertThat("Should return the value 3", getRegularPrice, is(3.0));
 	}

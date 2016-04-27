@@ -77,7 +77,7 @@ public class MovieTest {
 	@Test
 	public void testGetCharge_0() {
 		Movie movie = new Movie("gnilkreb", 0);
-		double charge = movie.getCharge(5);
+		double charge = movie.getAmount(5);
 		assertThat("Should return the value 4.5", charge, is(4.5));
 	}
 
