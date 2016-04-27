@@ -29,7 +29,7 @@ public class Customer {
 		}
 		
 		// add footer lines
-		builder.append("Amount owed is " + String.valueOf(getTotalAmount()) + "\n");
+		builder.append("Amount owed is " + String.valueOf(getTotalCharge()) + "\n");
 		builder.append("You earned " + String.valueOf(getTotalFrequentRenterPoints()) + " frequent renter points");
 		return builder.toString();
 	}
@@ -58,7 +58,7 @@ public class Customer {
 	// it, and you will have more
 	// options to optimize effectively (see the discussion on page 69).
 
-	private double getTotalAmount() {
+	private double getTotalCharge() {
 		double result = 0;
 		
 		for (Rental rental : rentals) {
