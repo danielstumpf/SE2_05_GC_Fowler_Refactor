@@ -25,7 +25,7 @@ public class Customer {
 		
 		for (Rental rental : rentals) {
 			builder.append("\t" + rental.getMovie().getTitle() + "\t" + "\t" + rental.getDaysRented() + "\t"
-					+ String.valueOf(rental.getAmount()) + "\n");
+					+ String.valueOf(rental.getCharge()) + "\n");
 		}
 		
 		// add footer lines
@@ -62,7 +62,7 @@ public class Customer {
 		double result = 0;
 		
 		for (Rental rental : rentals) {
-			result += rental.getAmount();
+			result += rental.getCharge();
 		}
 		return result;
 	}

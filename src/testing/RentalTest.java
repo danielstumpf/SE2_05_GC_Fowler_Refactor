@@ -43,7 +43,7 @@ public class RentalTest {
 	public void testGetCharge() {
 		Movie movieInput = new Movie("gnilkreb", 2); 
 		Rental rental = new Rental(movieInput, 3);
-		double daysRented = rental.getAmount();
+		double daysRented = rental.getCharge();
 		assertThat("Should return 1.5", daysRented, is(1.5));
 		
 	
