@@ -1,33 +1,26 @@
 package testing;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
+import org.junit.Rule;
 import org.junit.Test;
-
-import program.Customer;
-import program.Movie;
-import program.Rental;
+import org.junit.contrib.java.lang.system.SystemOutRule;
 
 public class ProgramTest {
 
+	@Rule
+    public final SystemOutRule systemOutRule = new SystemOutRule().enableLog();
+	
 	@Test
 	public void testMain() {
 		
-		// Get the value from the main method, store in result string
-        String result;
-        System.out.println("Welcome to the Movie Store");
-        Movie m1 = new Movie("movie1", 1);
-        Movie m2 = new Movie("movie2", 2);
-        Rental r1 = new Rental(m1, 10);
-        Rental r2 = new Rental(m2, 5);
-        Customer c1 = new Customer("joe");
-        c1.addRental(r1);   c1.addRental(r2);   
-        System.out.println("Let's get the Statement");
-        result = c1.statement();
 		
 		// build the string which should be returned by the main method
 		StringBuilder builder = new StringBuilder();
+		builder.append("Welcome to the Movie Store");
+		builder.append("\n");
+		builder.append("Let's get the Statement");
+		builder.append("\n");
 		builder.append("Rental Record for ");
 		builder.append("joe");
 		builder.append("\n");
@@ -65,9 +58,10 @@ public class ProgramTest {
 		builder.append("You earned ");
 		builder.append("3");
 		builder.append(" frequent renter points");
+		builder.append("\n");
+		program.Program.main(null);
 		
 		// Assert the values
-		assertThat("Should return a String", result, is(builder.toString()));
+		assertEquals(builder.toString(), systemOutRule.getLogWithNormalizedLineSeparator());
 	}
-
 }
