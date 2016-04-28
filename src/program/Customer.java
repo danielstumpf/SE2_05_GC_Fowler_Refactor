@@ -1,93 +1,66 @@
 package program;
 
+import java.lang.*;
 import java.util.*;
 
 public class Customer {
-	private String name;
-	public ArrayList<Rental> rentals = new ArrayList<Rental>();
+    private String name;
+    private Vector rentals = new Vector();
+    public Customer (String newname){
+        name = newname;
+    };
+    public void addRental(Rental arg) {
+        rentals.addElement(arg);
+    };
+    public String getName (){
+        return name;
+    };
+    public String statement() {
+        double totalAmount = 0;
+        int frequentRenterPoints = 0;
+        Enumeration enum_rentals = rentals.elements();	    
+        String result = "Rental Record for " + this.getName() + "\n";
+        result += "\t" + "Title" + "\t" + "\t" + "Days" + "\t" + "Amount" + "\n";
 
-	public Customer(String newname) {
-		name = newname;
-	}
+        while (enum_rentals.hasMoreElements()) {
+            double thisAmount = 0;
+            Rental each = (Rental) enum_rentals.nextElement();
+            //determine amounts for each line
+            thisAmount = amountFor(each);
+            // add frequent renter points
+            frequentRenterPoints ++;
+            // add bonus for a two day new release rental
+            if ((each.getMovie().getPriceCode() == Movie.NEW_RELEASE) && each.getDaysRented() > 1) 
+                frequentRenterPoints ++;
+            //show figures for this rental
+            result += "\t" + each.getMovie().getTitle()+ "\t" + "\t" + each.getDaysRented() + "\t" + String.valueOf(thisAmount) + "\n";
+            totalAmount += thisAmount;
+        }
+        //add footer lines
+        result += "Amount owed is " + String.valueOf(totalAmount) + "\n";
+        result += "You earned " + String.valueOf(frequentRenterPoints) + " frequent renter points";
+        return result;
+    }
 
-	public void addRental(Rental arg) {
-		rentals.add(arg);
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public String htmlStatement() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("<H1>Rentals for <EM>" + getName() + "</EM></H1><P>\n");
-		for (Rental rental : rentals) {
-			builder.append(rental.getMovie().getTitle() + ": " + String.valueOf(rental.getCharge()) + "<BR>\n");
-		}
-
-		// add footer lines
-		builder.append("<P>You owe <EM>" + String.valueOf(getTotalCharge()) + "</EM><P>\n");
-		builder.append("On this rental you earned <EM>" + String.valueOf(getTotalFrequentRenterPoints())
-				+ "</EM> frequent renter points<P>");
-		return builder.toString();
-	}
-
-	public String statement() {
-		StringBuilder builder = new StringBuilder();
-		builder.append("Rental Record for " + this.getName() + "\n");
-		builder.append("\t" + "Title" + "\t" + "\t" + "Days" + "\t" + "Amount" + "\n");
-
-		for (Rental rental : rentals) {
-			builder.append("\t" + rental.getMovie().getTitle() + "\t" + "\t" + rental.getDaysRented() + "\t"
-					+ String.valueOf(rental.getCharge()) + "\n");
-		}
-
-		// add footer lines
-		builder.append("Amount owed is " + String.valueOf(getTotalCharge()) + "\n");
-		builder.append("You earned " + String.valueOf(getTotalFrequentRenterPoints()) + " frequent renter points");
-		return builder.toString();
-	}
-
-	// It is worth stopping to think a bit about the last refactoring. Most
-	// refactorings reduce the amount
-	// of code, but this one increases it. That's because Java 1.1 requires a
-	// lot of statements to set up a
-	// summing loop. Even a simple summing loop with one line of code per
-	// element needs six lines of
-	// support around it. It's an idiom that is obvious to any programmer but is
-	// a lot of lines all the same.
-	// The other concern with this refactoring lies in performance. The old code
-	// executed the "while"
-	// loop once, the new code executes it three times. A while loop that takes
-	// a long time might impair
-	// performance. Many programmers would not do this refactoring simply for
-	// this reason. But note
-	// the words if and might. Until I profile I cannot tell how much time is
-	// needed for the loop to
-	// calculate or whether the loop is called often enough for it to affect the
-	// overall performance of the
-	// system. Don't worry about this while refactoring. When you optimize you
-	// will have to worry about
-	// it, but you will then be in a much better position to do something about
-	// it, and you will have more
-	// options to optimize effectively (see the discussion on page 69).
-
-	private double getTotalCharge() {
-		double result = 0;
-
-		for (Rental rental : rentals) {
-			result += rental.getCharge();
-		}
-		return result;
-	}
-
-	private int getTotalFrequentRenterPoints() {
-		int result = 0;
-
-		for (Rental rental : rentals) {
-			result += rental.getFrequentRenterPoints();
-		}
-		return result;
-	}
+    private double amountFor(Rental each) {
+        double thisAmount = 0;
+        switch (each.getMovie().getPriceCode()) {
+            case Movie.REGULAR:
+                thisAmount += 2;
+                if (each.getDaysRented() > 2)
+                    thisAmount += (each.getDaysRented() - 2) * 1.5;
+                break;
+            case Movie.NEW_RELEASE:
+                thisAmount += each.getDaysRented() * 3;
+                break;
+            case Movie.CHILDRENS:
+                thisAmount += 1.5;
+                if (each.getDaysRented() > 3)
+                    thisAmount += (each.getDaysRented() - 3) * 1.5;
+                break;
+        }
+        return thisAmount;
+    }
 
 }
+    
