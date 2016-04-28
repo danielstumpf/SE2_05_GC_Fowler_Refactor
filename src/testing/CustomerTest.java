@@ -21,20 +21,20 @@ public class CustomerTest {
 	
 	@Test
 	public void testCustomer_withString() {
-		String name = "xy";
+		String name = "gnilkreb";
 		Customer customer = new Customer(name);
 		
-		assertThat("name should be 'xy'.", customer.getName(), is("xy"));
+		assertThat("name should be gnilkreb.", customer.getName(), is("gnilkreb"));
 	}
 
 	@Test
 	public void testAddRental() {
-		//creates a Movie with name TestMovie and the setting Regular (0)
+		//creates a Movie object with name TestMovie and the setting Regular (0)
 		Movie movie = new Movie("TestMovie", 0); 
-		//creates a rental with movie "movie" and days rented "2"
-		Rental rental = new Rental(movie, 2); 
-		 //creates a new Customer with the name "xy"
-		Customer customer = new Customer("xy"); //creates a new Customer with the name "xy"
+		//creates a rental object with movie "movie" and days rented "2"
+		Rental rental = new Rental(movie, 2);
+		//creates a new Customer object with the name "gnilkreb"
+		Customer customer = new Customer("gnilkreb"); 
 		
 		assertFalse(customer.rentals.contains(rental));
 		
@@ -45,21 +45,68 @@ public class CustomerTest {
 
 	@Test
 	public void testGetName() {
-		String result = "xy";
+		String result = "gnilkreb";
 		Customer customer = new Customer(result);
 		result = customer.getName();
 		
-		assertThat("result should be 'xy'.", result, is("xy"));
+		assertThat("result should be gnilkreb.", result, is("gnilkreb"));
 	}
 
 	@Test
 	public void testStatement() {
-		Movie movie = new Movie("TestMovie", 0); //creates a Movie with name TestMovie and the setting Regular (0)
-		Rental rental = new Rental(movie, 2); //creates a rental with movie "movie" and days rented "2"
-		Customer customer = new Customer("xy"); //creates a new Customer with the name "xy"
+		//creates a Movie with name Fowler and the setting Regular (0)
+		Movie movie = new Movie("Fowler", 0); 
+		//creates a rental with movie "movie" and days rented "2"
+		Rental rental = new Rental(movie, 2); 
+		//creates a new Customer with the name "gnilkreb"
+		Customer customer = new Customer("gnilkreb"); 
 		customer.addRental(rental);
 		
-		assertThat("Rental Record for xy\n\tTitle\t\tDays\tAmount\n\tTestMovie\t\t2\t2.0\nAmount owed is 2.0\nYou earned 1 frequent renter points", customer.statement(), is("Rental Record for xy\n\tTitle\t\tDays\tAmount\n\tTestMovie\t\t2\t2.0\nAmount owed is 2.0\nYou earned 1 frequent renter points"));
+		StringBuilder stringBuilder = new StringBuilder();
+		stringBuilder.append("Rental Record for gnilkreb");
+		stringBuilder.append("\n");
+		stringBuilder.append("\t");
+		stringBuilder.append("Title\t\t");
+		stringBuilder.append("Days\t");
+		stringBuilder.append("Amount");
+		stringBuilder.append("\n\t");
+		stringBuilder.append("Fowler");
+		stringBuilder.append("\t\t");
+		stringBuilder.append("2");
+		stringBuilder.append("\t");
+		stringBuilder.append("2.0");
+		stringBuilder.append("\n");
+		stringBuilder.append("Amount owed is 2.0");
+		stringBuilder.append("\n");
+		stringBuilder.append("You earned 1 frequent renter points");
+		
+		assertThat("Compare the  Strings", customer.statement(), is(stringBuilder.toString()));
 	}
-
+	
+	@Test
+	public void testAmountFor_0() {
+		Movie movie = new Movie("gnilkreb", 0);
+		Rental rental = new Rental(movie, 2);
+		Customer customer = new Customer("Fowler");
+		
+		assertThat("Should return 2.0", customer.amountFor(rental), is(2.0));		
+	}
+	
+	@Test
+	public void testAmountFor_1() {
+		Movie movie = new Movie("gnilkreb", 1);
+		Rental rental = new Rental(movie, 2);
+		Customer customer = new Customer("Fowler");
+		
+		assertThat("Should return 6.0", customer.amountFor(rental), is(6.0));		
+	}
+	
+	@Test
+	public void testAmountFor_2() {
+		Movie movie = new Movie("gnilkreb", 2);
+		Rental rental = new Rental(movie, 2);
+		Customer customer = new Customer("Fowler");
+		
+		assertThat("Should return 1.5", customer.amountFor(rental), is(1.5));		
+	}
 }

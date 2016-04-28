@@ -73,18 +73,4 @@ public class MovieTest {
 		Movie movie = new Movie("gnilkreb", 0);
 		assertThat("Compare the movie values", movie.getTitle(), is("gnilkreb"));
 	}
-
-	@Test
-	public void testGetCharge_0() {
-		Movie movie = new Movie("gnilkreb", 0);
-		double charge = movie.getAmount(5);
-		assertThat("Should return the value 4.5", charge, is(4.5));
-	}
-
-	@Test
-	public void testGetFrequentRenterPoints() {
-		Movie movie = new Movie("gnilkreb", 0);
-		int frequentRenterPoints = movie.getFrequentRenterPoints(5);
-		assertThat("Should return the value 1", frequentRenterPoints, is(1));
-	}
 }
