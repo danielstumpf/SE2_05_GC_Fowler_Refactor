@@ -17,17 +17,13 @@ public class Movie {
 	}
 
 	public void setPriceCode(int arg) {
-		switch (arg) {
-		case REGULAR:
+		if (REGULAR == arg) {
 			price = new RegularPrice();
-			break;
-		case CHILDRENS:
+		} else if (CHILDRENS == arg) {
 			price = new ChildrensPrice();
-			break;
-		case NEW_RELEASE:
+		} else if (NEW_RELEASE == arg) {
 			price = new NewReleasePrice();
-			break;
-		default:
+		} else {
 			throw new IllegalArgumentException("Incorrect Price Code");
 		}
 	}
