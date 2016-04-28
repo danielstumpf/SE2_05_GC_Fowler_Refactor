@@ -41,12 +41,6 @@ public class MovieTest {
 		assertThat("Should return the value 2", priceCode, is(2));
 	}
 
-	@Test(expected = IllegalArgumentException.class)
-	public void testSetPriceCode_3() {
-		Movie movie = new Movie("lala", 0);
-		movie.setPriceCode(3);
-	}
-
 	@Test
 	public void testSetPriceCode_2() {
 		Movie movie = new Movie("lala", 0);

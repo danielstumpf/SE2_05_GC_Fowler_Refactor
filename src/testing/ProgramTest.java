@@ -48,11 +48,11 @@ public class ProgramTest {
 		builder.append("\t");
 		builder.append("5");
 		builder.append("\t");
-		builder.append("3.0");
+		builder.append("4.5");
 		builder.append("\n");
 		
 		builder.append("Amount owed is ");
-		builder.append("33.0");		
+		builder.append("34.5");		
 		builder.append("\n");
 		
 		builder.append("You earned ");
